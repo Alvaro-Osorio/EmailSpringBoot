@@ -3,6 +3,7 @@ package com.ao.mail.controller;
 import com.ao.mail.DTO.EmailDTO;
 import com.ao.mail.DTO.EmailFileDTO;
 import com.ao.mail.service.IEmailService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class MailController {
     private IEmailService iEmailService;
 
     @PostMapping("/sendMessage")
-    public ResponseEntity<?> receiveRequestEmail(@RequestBody EmailDTO emailDTO) {
+    public ResponseEntity<?> receiveRequestEmail(@RequestBody @Valid EmailDTO emailDTO) {
 
         System.out.print("Mensaje Recibido" + emailDTO);
         iEmailService.sendEmail(

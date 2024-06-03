@@ -12,6 +12,12 @@ public class EmailControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handlerFieldsErrors(MethodArgumentNotValidException exception){
+
         Map<String, String> errors = new HashMap<>();
+
+        exception.getBindingResult().getFieldErrors().forEach(error -> {
+            errors.put(error.getField(), error.getDefaultMessage());
+        });
+        return errors;
     }
 }
